@@ -190,40 +190,41 @@ HealthKit.prototype.saveCorrelation = function (options, successCallback, errorC
       options.endDate = Math.round(options.endDate.getTime()/1000);
     }
 
-	if (!options.samples instanceof Array) {
-		errorCallback("samples must be a JavaScript Array Object");
-      	return;
+  if (!options.samples instanceof Array) {
+    errorCallback("samples must be a JavaScript Array Object");
+        return;
     }
-    /*console.log('before samples loop');
+    console.log('before samples loop');
     console.log(options.samples);
     var finalSamples = [];
     var sample;
-    for ( sample in options.samples ) {
-    	var tempSample = sample;
-    	console.log('checking tempSample ');
-    	console.log(tempSample);
-    	if (!tempSample.startDate instanceof Date) {
-		  errorCallback("sample.startDate must be a JavaScript Date Object");
-		  return;
-		}
-		console.log('checking sample ');
-    	tempSample.startDate = Math.round(tempSample.startDate.getTime()/1000);
+    for (i=0;i<options.samples.length;i++){
+      var sample = options.samples[i]
+      var tempSample = sample;
+      console.log('checking tempSample — ');
+      console.log(tempSample);
+      if (!tempSample.startDate instanceof Date) {
+        errorCallback("sample.startDate must be a JavaScript Date Object");
+        return;
+      }
+    console.log('checking sample ');
+    tempSample.startDate = Math.round(tempSample.startDate.getTime()/1000);
 
-		console.log('checking sample ');
-    	if (!tempSample.endDate instanceof Date) {
-		  errorCallback("sample.endDate must be a JavaScript Date Object");
-		  return;
-		}
+    console.log('checking sample ');
+    if (!tempSample.endDate instanceof Date) {
+      errorCallback("sample.endDate must be a JavaScript Date Object");
+      return;
+    }
 
-		console.log('checking sample ');
-    	if (tempSample.endDate instanceof Date) {
-		  tempSample.endDate = Math.round(tempSample.endDate.getTime()/1000);
-		}
-		console.log('moving onto next sample');
-		finalSamples.push(tempSample);
+    console.log('checking sample ');
+    if (tempSample.endDate instanceof Date) {
+      tempSample.endDate = Math.round(tempSample.endDate.getTime()/1000);
+    }
+    console.log('moving onto next sample');
+    finalSamples.push(tempSample);
     }
     options.objects = finalSamples;
-    console.log('after objects loop');*/
+    console.log('after objects loop');
     var opts = options || {};
 
     cordova.exec(successCallback, errorCallback, "HealthKit", "saveCorrelation", [opts]);
